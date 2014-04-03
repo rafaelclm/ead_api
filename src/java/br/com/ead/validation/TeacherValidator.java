@@ -21,7 +21,7 @@ public class TeacherValidator {
             messages.put("O nome do professor é obrigatório");
         }
 
-        if (teacher.user != null) {
+        if (teacher.User == null) {
             messages.put("As informações do usuário são obrigatórias");
         }
 

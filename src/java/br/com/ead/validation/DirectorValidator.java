@@ -20,7 +20,7 @@ public class DirectorValidator {
             messages.put("O nome do diretor é obrigatório");
         }
 
-        if (director.user != null) {
+        if (director.User == null) {
             messages.put("As informações do usuário são obrigatórias");
         }
 

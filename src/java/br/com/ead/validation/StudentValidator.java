@@ -21,7 +21,7 @@ public class StudentValidator {
             messages.put("O nome do aluno é obrigatório");
         }
 
-        if (student.user != null) {
+        if (student.User == null) {
             messages.put("As informações do usuário são obrigatórias");
         }
 

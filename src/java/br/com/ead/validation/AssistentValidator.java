@@ -21,7 +21,7 @@ public class AssistentValidator {
             messages.put("O nome do assistente é obrigatório");
         }
 
-        if (assistent.user != null) {
+        if (assistent.User == null) {
             messages.put("As informações do usuário são obrigatórias");
         }
 

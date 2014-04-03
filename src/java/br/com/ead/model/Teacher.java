@@ -16,7 +16,7 @@ public class Teacher extends ParseObject implements IParseObject {
     public String Name;
     public Date BirthDate;
     public String Graduation;
-    public ParseUser user;
+    public ParseUser User;
 
     public Teacher() {
     }

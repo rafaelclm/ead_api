@@ -1,10 +1,7 @@
 package br.com.ead.service;
 
 import br.com.ead.model.Teacher;
-import br.com.ead.model.Teacher;
 import br.com.ead.validation.TeacherValidator;
-import com.google.gson.JsonSyntaxException;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
@@ -17,8 +14,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.parse4j.ParseException;
 import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
@@ -64,14 +59,14 @@ public class TeacherResource extends ParseResource {
 
             Teacher teacher = gson.fromJson(content, Teacher.class);
             TeacherValidator.validate(teacher);
-            teacher.user.signUp();
+            teacher.User.signUp();
             teacher.saveInstance();
 
             return Response.status(Response.Status.CREATED).entity(gson.toJson(teacher)).build();
 
         } catch (Exception ex) {
             Logger.getLogger(TeacherResource.class.getName()).log(Level.SEVERE, null, ex);
-            return Response.ok().entity(gson.toJson(ex.getMessage())).build();
+            return Response.ok().entity(ex.getMessage()).build();
         }
 
     }

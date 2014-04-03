@@ -20,7 +20,7 @@ public class AdministratorValidator {
             messages.put("O nome do administrador é obrigatório");
         }
 
-        if (administrator.user != null) {
+        if (administrator.User == null) {
             messages.put("As informações do usuário são obrigatórias");
         }
 

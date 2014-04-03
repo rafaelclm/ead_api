@@ -64,7 +64,7 @@ public class AdministratorResource extends ParseResource {
 
             Administrator administrator = gson.fromJson(content, Administrator.class);
             AdministratorValidator.validate(administrator);
-            administrator.user.signUp();
+            administrator.User.signUp();
             administrator.saveInstance();
 
             return Response.status(Response.Status.CREATED).entity(gson.toJson(administrator)).build();

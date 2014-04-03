@@ -6,9 +6,7 @@
 package br.com.ead.service;
 
 import br.com.ead.model.Director;
-import br.com.ead.model.Director;
 import br.com.ead.validation.DirectorValidator;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
@@ -21,7 +19,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import org.json.JSONObject;
 import org.parse4j.ParseException;
 import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
@@ -67,14 +64,14 @@ public class DirectorResource extends ParseResource {
 
             Director director = gson.fromJson(content, Director.class);
             DirectorValidator.validate(director);
-            director.user.signUp();
+            director.User.signUp();
             director.saveInstance();
 
             return Response.status(Response.Status.CREATED).entity(gson.toJson(director)).build();
 
         } catch (Exception ex) {
             Logger.getLogger(DirectorResource.class.getName()).log(Level.SEVERE, null, ex);
-            return Response.ok().entity(gson.toJson(ex.getMessage())).build();
+            return Response.ok().entity(ex.getMessage()).build();
         }
 
     }

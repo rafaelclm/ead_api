@@ -70,14 +70,14 @@ public class StudentResource extends ParseResource {
             counters.saveInBackground();
             student.ra = String.format("RA%08d", counters.getInt("ra"));
 
-            student.user.signUp();
+            student.User.signUp();
             student.saveInstance();
 
             return Response.status(Response.Status.CREATED).entity(gson.toJson(student)).build();
 
         } catch (Exception ex) {
             Logger.getLogger(StudentResource.class.getName()).log(Level.SEVERE, null, ex);
-            return Response.ok().entity(gson.toJson(ex.getMessage())).build();
+            return Response.ok().entity(ex.getMessage()).build();
         }
     }
 }

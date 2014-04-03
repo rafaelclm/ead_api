@@ -64,14 +64,14 @@ public class AssistentResource extends ParseResource {
 
             Assistent assistent = gson.fromJson(content, Assistent.class);
             AssistentValidator.validate(assistent);
-            assistent.user.signUp();
+            assistent.User.signUp();
             assistent.saveInstance();
 
             return Response.status(Response.Status.CREATED).entity(gson.toJson(assistent)).build();
 
         } catch (Exception ex) {
             Logger.getLogger(AssistentResource.class.getName()).log(Level.SEVERE, null, ex);
-            return Response.ok().entity(gson.toJson(ex.getMessage())).build();
+            return Response.ok().entity(ex.getMessage()).build();
         }
 
     }

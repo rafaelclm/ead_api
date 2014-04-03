@@ -34,7 +34,7 @@ public class InstitutionValidator {
         if (institution.PhoneNumber == null) {
             messages.put("O telefone da instituição é obrigatório");
         }
-
+        
         if (messages.length() > 0) {
             throw new Exception(messages.toString(4));
         }

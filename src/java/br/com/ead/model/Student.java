@@ -22,7 +22,7 @@ public class Student extends ParseObject implements IParseObject {
     public Date BirthDate;
     public String Graduation;
     public String ra;
-    public ParseUser user;
+    public ParseUser User;
 
     public Student() {
     }
