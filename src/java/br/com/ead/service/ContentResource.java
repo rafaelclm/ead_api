@@ -3,8 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package br.com.ead.service;
 
+import br.com.ead.model.Content;
+import br.com.ead.model.Discipline;
+import br.com.ead.validation.ContentValidator;
+import br.com.ead.validation.DisciplineValidator;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -18,38 +23,34 @@ import javax.ws.rs.core.Response;
 import org.parse4j.ParseException;
 import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
-import br.com.ead.model.Student;
-import br.com.ead.validation.StudentValidator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * REST Web Service
  *
  * @author Rafael
  */
-@Path("student")
-public class StudentResource extends ParseResource {
+@Path("content")
+public class ContentResource extends ParseResource{
 
     @Context
     private UriInfo context;
 
     /**
-     * Creates a new instance of StudentResource
+     * Creates a new instance of ContentResource
      */
-    public StudentResource() {
+    public ContentResource() {
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("{ra}")
-    public Response getStudent(@PathParam("ra") String ra) {
+    @Path("{objectId}")
+    public Response getContent(@PathParam("objectId") String objectId) {
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Student");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Period");
 
         try {
-            ParseObject student = query.get(ra);
-            return Response.ok(gson.toJson(student)).build();
+            ParseObject discipline = query.get(objectId);
+            return Response.ok(gson.toJson(discipline)).build();
         } catch (ParseException pe) {
             return Response.status(Response.Status.NOT_FOUND).entity(pe.getMessage()).build();
         }
@@ -58,21 +59,19 @@ public class StudentResource extends ParseResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response postStudent(String content) {
+    public Response postContent(String _content) {
 
         try {
 
-            Student student = gson.fromJson(content, Student.class);
-            student.generateAReg();
-            StudentValidator.validate(student);
-            student.User.signUp();
-            student.saveInstance();
+            Content content = gson.fromJson(_content, Content.class);
+            ContentValidator.validate(content);
+            content.saveInstance();
 
-            return Response.status(Response.Status.CREATED).entity(gson.toJson(student)).build();
+            return Response.status(Response.Status.CREATED).entity(gson.toJson(content)).build();
 
         } catch (Exception ex) {
-            Logger.getLogger(StudentResource.class.getName()).log(Level.SEVERE, null, ex);
             return Response.ok().entity(ex.getMessage()).build();
         }
+
     }
 }

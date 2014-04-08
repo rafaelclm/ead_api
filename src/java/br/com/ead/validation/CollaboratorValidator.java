@@ -1,6 +1,6 @@
 package br.com.ead.validation;
 
-import br.com.ead.model.Teacher;
+import br.com.ead.model.Collaborator;
 import org.json.JSONArray;
 import org.parse4j.ParseObject;
 import org.parse4j.ParseQuery;
@@ -9,30 +9,30 @@ import org.parse4j.ParseQuery;
  *
  * @author Rafael
  */
-public class TeacherValidator {
+public class CollaboratorValidator {
 
-    public TeacherValidator() {
+    public CollaboratorValidator() {
     }
 
-    public static void validate(Teacher teacher) throws Exception {
+    public static void validate(Collaborator collaborator) throws Exception {
 
         JSONArray messages = new JSONArray();
 
-        if (teacher.User != null) {
-            if (teacher.User.getName() == null) {
-                messages.put("O nome do professor é obrigatório");
+        if (collaborator.User != null) {
+            if (collaborator.User.getName() == null) {
+                messages.put("O nome do colaborador é obrigatório");
             }
         } else {
             messages.put("As informações do usuário são obrigatórias");
         }
-        
-        if (teacher.InstitutionId != null) {
+
+        if (collaborator.InstitutionId != null) {
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Institution");
-            if (query.get(teacher.InstitutionId) == null) {
+            if (query.get(collaborator.InstitutionId) == null) {
                 messages.put("A instituição informada não foi encontrada");
             }
         } else {
-            teacher.InstitutionId = "openTeacher";
+            messages.put("O ID da instituição não foi informado");
         }
 
         if (messages.length() > 0) {

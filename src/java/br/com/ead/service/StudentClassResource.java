@@ -5,13 +5,14 @@
  */
 package br.com.ead.service;
 
-import br.com.ead.model.Assistent;
-import br.com.ead.validation.AssistentValidator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.ws.rs.Consumes;
+import br.com.ead.model.Course;
+import br.com.ead.model.StudentClass;
+import br.com.ead.validation.CourseValidator;
+import br.com.ead.validation.StudentClassValidator;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -28,28 +29,22 @@ import org.parse4j.ParseQuery;
  *
  * @author Rafael
  */
-@Path("assistent")
-public class AssistentResource extends ParseResource {
+@Path("studentclass")
+public class StudentClassResource extends ParseResource{
 
     @Context
     private UriInfo context;
 
-    /**
-     * Creates a new instance of AssistentResource
-     */
-    public AssistentResource() {
-    }
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{objectId}")
-    public Response getAssistent(@PathParam("objectId") String objectId) {
+    public Response getStudentClass(@PathParam("objectId") String ObjectId) {
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Assistent");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("StudentClass");
 
         try {
-            ParseObject assistent = query.get(objectId);
-            return Response.ok(gson.toJson(assistent)).build();
+            ParseObject studentClass = query.get(ObjectId);
+            return Response.ok(gson.toJson(studentClass)).build();
         } catch (ParseException pe) {
             return Response.status(Response.Status.NOT_FOUND).entity(pe.getMessage()).build();
         }
@@ -58,22 +53,18 @@ public class AssistentResource extends ParseResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response postAssistent(String content) {
-        
-         try {
+    public Response postStudentClass(String content) {
+        try {
 
-            Assistent assistent = gson.fromJson(content, Assistent.class);
-            AssistentValidator.validate(assistent);
-            assistent.User.signUp();
-            assistent.saveInstance();
+            StudentClass studentClass = gson.fromJson(content, StudentClass.class);
+            StudentClassValidator.validate(studentClass);
+            studentClass.saveInstance();
 
-            return Response.status(Response.Status.CREATED).entity(gson.toJson(assistent)).build();
+            return Response.status(Response.Status.CREATED).entity(gson.toJson(studentClass)).build();
 
         } catch (Exception ex) {
-            Logger.getLogger(AssistentResource.class.getName()).log(Level.SEVERE, null, ex);
             return Response.ok().entity(ex.getMessage()).build();
         }
 
     }
-    
 }

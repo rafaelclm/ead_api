@@ -43,8 +43,8 @@ public class TeacherResource extends ParseResource {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Teacher");
 
         try {
-            ParseObject administrator = query.get(objectId);
-            return Response.ok(gson.toJson(administrator)).build();
+            ParseObject teacher = query.get(objectId);
+            return Response.ok(gson.toJson(teacher)).build();
         } catch (ParseException pe) {
             return Response.status(Response.Status.NOT_FOUND).entity(pe.getMessage()).build();
         }

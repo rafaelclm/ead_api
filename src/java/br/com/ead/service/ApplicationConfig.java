@@ -31,11 +31,18 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(br.com.ead.service.AdministratorResource.class);
-        resources.add(br.com.ead.service.AssistentResource.class);
+        resources.add(br.com.ead.service.CollaboratorResource.class);
+        resources.add(br.com.ead.service.ContentResource.class);
+        resources.add(br.com.ead.service.CourseResource.class);
         resources.add(br.com.ead.service.DirectorResource.class);
+        resources.add(br.com.ead.service.DisciplineResource.class);
+        resources.add(br.com.ead.service.DropBoxResource.class);
         resources.add(br.com.ead.service.InstitutionResource.class);
+        resources.add(br.com.ead.service.PeriodResource.class);
+        resources.add(br.com.ead.service.StudentClassResource.class);
         resources.add(br.com.ead.service.StudentResource.class);
         resources.add(br.com.ead.service.TeacherResource.class);
+        resources.add(br.com.ead.service.UserResource.class);
     }
     
 }

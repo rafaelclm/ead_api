@@ -7,9 +7,9 @@ package br.com.ead.service;
 
 import br.com.ead.model.Administrator;
 import br.com.ead.validation.AdministratorValidator;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -33,7 +33,7 @@ import org.parse4j.ParseQuery;
 public class AdministratorResource extends ParseResource {
 
     @Context
-    private UriInfo context;
+    private HttpServletRequest request;
 
     /**
      * Creates a new instance of AdministratorResource
@@ -63,6 +63,7 @@ public class AdministratorResource extends ParseResource {
         try {
 
             Administrator administrator = gson.fromJson(content, Administrator.class);
+            administrator.InstitutionId = request.getHeader("institutionId");
             AdministratorValidator.validate(administrator);
             administrator.User.signUp();
             administrator.saveInstance();

@@ -1,8 +1,6 @@
 package br.com.ead.model;
 
 import br.com.ead.impl.IParseObject;
-import java.util.ArrayList;
-import java.util.List;
 import org.parse4j.ParseClassName;
 import org.parse4j.ParseObject;
 
@@ -23,10 +21,9 @@ public class Institution extends ParseObject implements IParseObject {
     public String Country;
     public String PostCode;
     public String PhoneNumber;
-    public List<String> AdministratorsReference;
+    public String Domain;
 
     public Institution() {
-        AdministratorsReference = new ArrayList<>();
     }
 
     @Override

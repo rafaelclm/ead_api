@@ -1,7 +1,7 @@
-
 package br.com.ead.model;
 
-import java.util.List;
+import br.com.ead.impl.IParseObject;
+import java.util.Date;
 import org.parse4j.ParseClassName;
 import org.parse4j.ParseObject;
 
@@ -10,17 +10,19 @@ import org.parse4j.ParseObject;
  * @author Rafael
  */
 @ParseClassName("StudentClass")
-public class StudentClass extends ParseObject{
+public class StudentClass extends ParseObject implements IParseObject{
+
+    public Date StartDate;
+    public Date EndDate;
+    public String PeriodId;
 
     public StudentClass() {
     }
-    
-     public List<Student> getStudents(){
-        return super.getList("students");
+
+    @Override
+    public void saveInstance() throws Exception {
+        super.save(this);
     }
-    
-    public void setStudents(List students){
-        super.put("students", students);
-    }
-    
+      
+
 }

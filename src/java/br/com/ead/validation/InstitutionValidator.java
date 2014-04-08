@@ -2,6 +2,8 @@ package br.com.ead.validation;
 
 import br.com.ead.model.Institution;
 import org.json.JSONArray;
+import org.parse4j.ParseObject;
+import org.parse4j.ParseQuery;
 
 /**
  *
@@ -21,10 +23,20 @@ public class InstitutionValidator {
             messages.put("A razão social da instituição é obrigatório");
         }
 
-        if (institution.LegalPersonID == null) {
+        if (institution.LegalPersonID != null) {
+
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Institution");
+            query.whereEqualTo("LegalPersonID", institution.LegalPersonID);
+            if (query.find() != null) {
+                messages.put("Já existe uma instituição registrada com o LegalPersonID informado - " + institution.LegalPersonID);
+            }
+            
+            if (institution.LegalPersonID.length() > 14) {
+                messages.put("O tamanho máximo do campo LegalPersonID é 14");
+            }
+            
+        } else {
             messages.put("O CNPJ da instituição é obrigatório");
-        } else if (institution.LegalPersonID.length() > 14) {
-            messages.put("O tamanho máximo do campo CNPJ é 14");
         }
 
         if (institution.PostCode == null) {
@@ -34,7 +46,7 @@ public class InstitutionValidator {
         if (institution.PhoneNumber == null) {
             messages.put("O telefone da instituição é obrigatório");
         }
-        
+
         if (messages.length() > 0) {
             throw new Exception(messages.toString(4));
         }
