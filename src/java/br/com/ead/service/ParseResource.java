@@ -39,7 +39,9 @@ public class ParseResource {
             String[] pares = decoded.split("&");
             for (String pare : pares) {
                 String[] nameAndValue = pare.split("=");
-                parameters.put(nameAndValue[0], nameAndValue[1]);
+                if (nameAndValue.length == 2) {
+                    parameters.put(nameAndValue[0], nameAndValue[1]);
+                }
             }
 
         }
