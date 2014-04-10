@@ -7,15 +7,13 @@ import org.parse4j.ParseObject;
  *
  * @author Rafael
  */
-public class Activity extends ParseObject implements IParseObject {
+public class Tutorial extends ParseObject implements IParseObject {
 
     public String Title;
-    public int Duration;
-    public String Description;
-    public String Body;
-    public String ContentId;
-
-    public Activity() {
+    public String teacherAuthor;
+    
+    public Tutorial() {
+        
     }
 
     @Override

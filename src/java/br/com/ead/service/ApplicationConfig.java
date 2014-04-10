@@ -32,6 +32,7 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(br.com.ead.service.AdministratorResource.class);
         resources.add(br.com.ead.service.CollaboratorResource.class);
+        resources.add(br.com.ead.service.ConnectionResource.class);
         resources.add(br.com.ead.service.ContentResource.class);
         resources.add(br.com.ead.service.CourseResource.class);
         resources.add(br.com.ead.service.DirectorResource.class);
@@ -42,6 +43,7 @@ public class ApplicationConfig extends Application {
         resources.add(br.com.ead.service.StudentClassResource.class);
         resources.add(br.com.ead.service.StudentResource.class);
         resources.add(br.com.ead.service.TeacherResource.class);
+        resources.add(br.com.ead.service.TutorialResource.class);
         resources.add(br.com.ead.service.UserResource.class);
     }
     

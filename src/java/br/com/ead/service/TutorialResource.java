@@ -1,7 +1,13 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package br.com.ead.service;
 
-import br.com.ead.model.Discipline;
-import br.com.ead.validation.DisciplineValidator;
+import br.com.ead.model.Tutorial;
+import br.com.ead.validation.TutorialValidator;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -21,24 +27,24 @@ import org.parse4j.ParseQuery;
  *
  * @author Rafael
  */
-@Path("discipline")
-public class DisciplineResource extends ParseResource{
+@Path("tutorial")
+public class TutorialResource extends ParseResource{
 
     @Context
     private UriInfo context;
 
     /**
-     * Creates a new instance of DisciplineResource
+     * Creates a new instance of TutorialResource
      */
-    public DisciplineResource() {
+    public TutorialResource() {
     }
 
-    @GET
+   @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{objectId}")
-    public Response getDiscipline(@PathParam("objectId") String objectId) {
+    public Response getTutorial(@PathParam("objectId") String objectId) {
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Discipline");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Tutorial");
 
         try {
             ParseObject discipline = query.get(objectId);
@@ -51,15 +57,15 @@ public class DisciplineResource extends ParseResource{
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response postDiscipline(String content) {
+    public Response postTutorial(String content) {
 
         try {
 
-            Discipline discipline = gson.fromJson(content, Discipline.class);
-            DisciplineValidator.validate(discipline);
-            discipline.saveInstance();
+            Tutorial tutorial = gson.fromJson(content, Tutorial.class);
+            TutorialValidator.validate(tutorial);
+            tutorial.saveInstance();
 
-            return Response.status(Response.Status.CREATED).entity(gson.toJson(discipline)).build();
+            return Response.status(Response.Status.CREATED).entity(gson.toJson(tutorial)).build();
 
         } catch (Exception ex) {
             return Response.ok().entity(ex.getMessage()).build();
