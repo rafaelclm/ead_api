@@ -8,7 +8,6 @@ package br.com.ead.service;
 
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.Path;
 import javax.ws.rs.GET;

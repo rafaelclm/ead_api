@@ -11,6 +11,7 @@ public class Tutorial extends ParseObject implements IParseObject {
 
     public String Title;
     public String teacherAuthor;
+    public String Category;
     
     public Tutorial() {
         

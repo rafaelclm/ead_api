@@ -26,7 +26,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import org.apache.commons.io.IOUtils;
 import org.json.JSONObject;
 import org.parse4j.ParseException;
 import org.parse4j.ParseObject;
@@ -121,7 +120,13 @@ public class DropBoxResource extends ParseResource {
                 }
             }
 
-            DbxClient dbxClient = new DbxClient(getRequestConfig(request), getToken(userId));
+            String token = getToken(userId);
+            
+            if(token == null){
+                throw new Exception("Token não encontrado");
+            }
+            
+            DbxClient dbxClient = new DbxClient(getRequestConfig(request), token);
 
             DbxEntry.WithChildren listing;
             listing = dbxClient.getMetadataWithChildren(path);
@@ -130,7 +135,7 @@ public class DropBoxResource extends ParseResource {
 
         } catch (Exception ex) {
             error.put("error", ex.getMessage());
-            return Response.status(Response.Status.NOT_FOUND).entity(ex.getMessage()).build();
+            return Response.status(Response.Status.NOT_ACCEPTABLE).entity(ex.getMessage()).build();
         }
 
     }
@@ -195,10 +200,10 @@ public class DropBoxResource extends ParseResource {
 
     private DbxWebAuthNoRedirect getWebAuth() {
 
-        final String APP_KEY = "8q6ap39ipefwg8m";
-        final String APP_SECRET = "y5qoyr762e37qch";
+        final String DROPBOX_APP_KEY = "8q6ap39ipefwg8m";
+        final String DROPBOX_APP_SECRET = "y5qoyr762e37qch";
 
-        DbxAppInfo appInfo = new DbxAppInfo(APP_KEY, APP_SECRET);
+        DbxAppInfo appInfo = new DbxAppInfo(DROPBOX_APP_KEY, DROPBOX_APP_SECRET);
         DbxRequestConfig config = new DbxRequestConfig("OpenEdu/1.0",
                 Locale.getDefault().toString());
 

@@ -7,8 +7,6 @@ import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
 import org.parse4j.Parse;
 
 /**
@@ -17,8 +15,8 @@ import org.parse4j.Parse;
  */
 public class ParseResource {
 
-    private static final String APP_ID = "8unEbVKBBSMBCRld8AS7a87PeYOVIxdzIuH1I2n3";
-    private static final String APP_KEY = "Gl7Alk7kE9n6Q4OI2FBo5LWDQD6x28Iu5pPwDcd1";
+    protected static final String APP_ID = "8unEbVKBBSMBCRld8AS7a87PeYOVIxdzIuH1I2n3";
+    protected static final String APP_KEY = "Gl7Alk7kE9n6Q4OI2FBo5LWDQD6x28Iu5pPwDcd1";
 
     protected static final String PATTERN_DATE = "dd/MM/yyyy";
     protected String _corsHeaders;
