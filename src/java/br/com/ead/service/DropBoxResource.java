@@ -223,7 +223,10 @@ public class DropBoxResource extends ParseResource {
         ParseObject dropBox = (query.find() == null ? null : finded.get(0));
 
         if (dropBox == null) {
-            throw new Exception("Usuário não foi encontrado");
+            JSONObject error = new JSONObject();
+            error.put("dropboxUser", false);
+            error.put("message", "Usuário não está vinculado ao DropBox");
+            throw new Exception(error.toString(4));
         }
 
         return dropBox.getString("AccessToken");

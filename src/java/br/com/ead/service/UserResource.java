@@ -14,11 +14,12 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.parse4j.ParseException;
 import org.parse4j.ParseUser;
 
@@ -41,11 +42,12 @@ public class UserResource extends ParseResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response login(@QueryParam("username") String username, @QueryParam("password") String password) {
+    public Response login(String content) {
+        JSONObject credentials = gson.fromJson(content, JSONObject.class);
         try {
-            ParseUser user = ParseUser.login(username, password);
+            ParseUser user = ParseUser.login(credentials.getString("username"), credentials.getString("password"));
             return Response.status(Response.Status.CREATED).entity(gson.toJson(user)).build();
-        } catch (Exception ex) {
+        } catch (JSONException | ParseException ex) {
             return Response.ok().entity(ex.getMessage()).build();
         }
     }

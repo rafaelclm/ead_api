@@ -7,11 +7,9 @@ package br.com.ead.service;
 
 import br.com.ead.model.Course;
 import br.com.ead.validation.CourseValidator;
-import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Path;
